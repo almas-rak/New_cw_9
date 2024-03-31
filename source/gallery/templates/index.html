@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+
+{% block title %} Главная {% endblock title %}
+
+{% block content %}
+{% if photos %}
+    {% for photo in photos %}
+        <p> {{ photo.caption }} </p>
+    {% endfor %}
+{% else %}
+<h1>Галерея Пуста</h1>
+{% endif %}
+
+{% endblock content %}
