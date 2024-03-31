@@ -1,0 +1,13 @@
+{% load django_bootstrap5 %}
+{% bootstrap_css %}
+{% bootstrap_javascript %}
+{% bootstrap_messages %}
+{% csrf_token %}
+
+<div class="container col-md-10 col-lg-8">
+    {% bootstrap_form form %}
+<div class="form_row">
+            {% bootstrap_button "Save" button_type="submit" button_class="btn-primary" %}
+            <a href="{% url 'main_page' %}" class="btn btn-primary">Cancel</a>
+        </div>
+</div>

@@ -1,0 +1,5 @@
+<div class="form">
+    <form action="{% url 'update_photo' photo.pk %}" method="POST" enctype="multipart/form-data">
+    {% include 'partial/form.html' %}
+    </form>
+</div>

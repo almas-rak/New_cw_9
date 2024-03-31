@@ -1,11 +1,19 @@
 {% extends "base.html" %}
 
 {% block title %} Главная {% endblock title %}
+{% block menu %}
+<li class="nav-item"><a class="nav-link active" href="{% url 'add_photo' %}" > Добавить фото</a></li>
+{% endblock menu %}
 
 {% block content %}
 {% if photos %}
     {% for photo in photos %}
+        <a href="{% url 'detail_photo' photo.pk  %}">
+        <img src="{{ photo.photo.url }}" style="height: 300px; width: 300px;">
+        </a>
         <p> {{ photo.caption }} </p>
+        <p> {{ photo.author }} </p>
+        <p> {{ photo.created_at }} </p>
     {% endfor %}
 {% else %}
 <h1>Галерея Пуста</h1>

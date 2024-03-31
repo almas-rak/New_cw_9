@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% block title %}
+    Добавление новой фотографии
+{% endblock title %}
+
+{% block menu %}
+{% endblock menu %}
+
+{% block content %}
+    <h1>Добавление новой фотографии</h1>
+<div class="form">
+    <form action="{% url 'add_photo' %}" method="POST" enctype="multipart/form-data">
+    {% include 'partial/form.html' %}
+    </form>
+</div>
+{% endblock content %}

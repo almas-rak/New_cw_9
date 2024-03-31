@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+{% block title %}
+    Добавление новой фотографии
+{% endblock title %}
+
+{% block menu %}
+    <li><a href="{% url 'main_page' %}">Главная</a></li>
+{% endblock menu %}
+{% block content %}
+<a href="{% url 'detail_photo' photo.pk  %}">
+        <img src="{{ photo.photo.url }}" style="height: 300px; width: 300px;">
+        </a>
+        <p> {{ photo.caption }} </p>
+        <p> {{ photo.author }} </p>
+        <p> {{ photo.created_at }} </p>
+<a href="{% url  'update_photo' photo.pk  %}" >изменить</a>
+<p>{{ photo.author }}</p>
+{% endblock content %}
