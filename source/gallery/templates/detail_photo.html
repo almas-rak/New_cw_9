@@ -6,12 +6,37 @@
 {% block menu %}
 {% endblock menu %}
 {% block content %}
-<a href="{% url 'detail_photo' photo.pk  %}">
-        <img src="{{ photo.photo.url }}" style="height: 300px; width: 300px;">
-        </a>
-        <p> {{ photo.caption }} </p>
-        <p> {{ photo.author }} </p>
-        <p> {{ photo.created_at }} </p>
-<a href="{% url  'update_photo' photo.pk  %}" >изменить</a>
-<p>{{ photo.author }}</p>
+    <div class="container">
+        <div class="modal-dialog modal-fullscreen-sm-down">
+            
+        </div>      
+        <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#exampleModal" style="z-index: 4;">
+            <img src="{{ photo.photo.url }}" style="height: 300px; width: 300px; z-index: 2;">
+        </button>
+                
+                <p> {{ photo.caption }} </p>
+                <p> {{ photo.author }} </p>
+                <p> {{ photo.created_at }} </p>
+        <a href="{% url  'update_photo' photo.pk  %}" >изменить</a>
+        <p>{{ photo.author }}</p>
+    </div>
+
+
+    
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-xl modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="exampleModalLabel">{{ photo.caption }}</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <img src="{{ photo.photo.url }}" style="height: 100%; width: 100%;">
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Закрыть</button>
+                </div>
+            </div>
+        </div>
+    </div>
 {% endblock content %}
