@@ -2,21 +2,34 @@
 
 {% block title %} Главная {% endblock title %}
 {% block menu %}
+{% if user.is_authenticated %}
 <li class="nav-item"><a class="nav-link active" href="{% url 'add_photo' %}" > Добавить фото</a></li>
+{% endif %}
 {% endblock menu %}
 
 {% block content %}
+<div class="container d-flex flex-wrap">
 {% if photos %}
+
     {% for photo in photos %}
-        <a href="{% url 'detail_photo' photo.pk  %}">
-        <img src="{{ photo.photo.url }}" style="height: 300px; width: 300px;">
+    <div class="card m-2" style="width: 18rem;">
+        <a href="{% url 'detail_photo' photo.pk  %}" class="m-auto mt-2" style="width: 17rem;">
+            <img class="card-img-top" src="{{ photo.photo.url }}" style="height: 300px;">
         </a>
-        <p> {{ photo.caption }} </p>
-        <p> {{ photo.author }} </p>
-        <p> {{ photo.created_at }} </p>
+        <div class="card-body">
+            <p class="card-text"><small class="text-muted">Подпись: </small>{{ photo.caption }}</p>
+            <br>
+            <p class="card-text"></p>
+            <p class="card-text"> <small class="text-muted">Автор: </small>{{ photo.author }} </p>
+            
+        <small class="text-muted">Дата и время добавления</small>
+            <p class="card-text"> {{ photo.created_at }} </p>
+        </div>
+    </div>
+        
     {% endfor %}
 {% else %}
 <h1>Галерея Пуста</h1>
 {% endif %}
-
+</div>
 {% endblock content %}
