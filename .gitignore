@@ -1,3 +1,5 @@
 .idea
 venv_cw9
 uploads
+.zip
+__pycache__
