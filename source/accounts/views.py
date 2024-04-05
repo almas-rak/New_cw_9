@@ -1,9 +1,13 @@
 from django.contrib import messages
-from django.contrib.auth import logout, authenticate, login
-from django.shortcuts import redirect
-from django.views.generic import TemplateView, CreateView
+from django.contrib.auth import logout, authenticate, login, get_user_model
+from django.contrib.auth.mixins import LoginRequiredMixin
+from django.core.paginator import Paginator
+from django.shortcuts import redirect, render
+from django.views.generic import TemplateView, CreateView, DetailView
 
 from accounts.forms import LoginForm, CustomUserCreationForm
+from accounts.models import AccountProfile
+from gallery.models import GalleryPhoto, FavoriteModel
 
 
 class Login(TemplateView):
@@ -51,3 +55,19 @@ class RegisterView(CreateView):
             return redirect(self.success_url)
         context = {'form': form}
         return self.render_to_response(context)
+
+
+def profile_view(request, pk):
+    user = get_user_model().objects.get(pk=pk)
+    profile = AccountProfile.objects.get(user=user)
+    publications = GalleryPhoto.objects.filter(author=pk)
+    favorite = FavoriteModel.objects.filter(us_pk=pk)
+    template_name = "user_detail.html"
+    context = {
+        "user_obj": user,
+        "profile": profile,
+        "publications": publications,
+        "favorite": favorite
+    }
+    return render(request, template_name=template_name, context=context)
+

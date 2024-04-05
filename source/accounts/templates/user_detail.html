@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+{% block title %}Пользователь{% endblock %}
+
+{% block menu %}
+    <li class="nav-item"><a href="#" class="nav-link active" aria-current="page">Редактировать</a></li>
+    <li class="nav-item"><a href="#" class="nav-link active" aria-current="page">Смена пароля</a></li>
+{% endblock %}
+
+{% block content %}
+
+    <h1>Личная страница пользователя {{ user_obj.get_full_name|default:user_obj.username }}</h1>   
+    <img class="avatar" src="{{ profile.avatar.url }}" width="250" height="250" alt="user picture">
+    <p>Имя пользователя: {{ user_obj.username }}</p>
+    <p>Имя: {{ user_obj.first_name }}</p>
+    <p>Фамилия: {{ user_obj.last_name }}</p>
+    <h2>Публикации</h2>
+    {% if publications %}
+    
+    {% for photo in publications %}
+    <div class="card m-2" style="width: 18rem;">
+        <a href="{% url 'detail_photo' photo.pk  %}" class="m-auto mt-2" style="width: 17rem;">
+            <img class="card-img-top" src="{{ photo.photo.url }}" style="height: 300px;">
+        </a>
+        <div class="card-body">
+            <p class="card-text"><small class="text-muted">Подпись: </small>{{ photo.caption }}</p>
+            <br>
+            <p class="card-text"></p>
+            <p class="card-text"> <small class="text-muted">Автор: </small><a href="{% url 'profile' photo.author.pk %}" >{{ photo.author }}</a> </p>
+            
+        <small class="text-muted">Дата и время добавления</small>
+            <p class="card-text"> {{ photo.created_at }} </p>
+        </div>
+    </div>
+    {% endfor %}
+    {% else %}
+    <p class="card-text"> <small class="text-muted">Нет публикаций </small> </p>
+    {% endif %}
+    
+
+    <h2>Избранное</h2>
+    {% if favorite %}
+    {% else %}
+    <p class="card-text"> <small class="text-muted">Нет Избранного</small> </p>
+    {% endif %}
+</div>
+<br>
+<br>
+{% endblock %}
