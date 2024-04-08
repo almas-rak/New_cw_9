@@ -37,6 +37,7 @@
                     <img src="{{ photo.photo.url }}" style="height: 100%; width: 100%;">
                 </div>
                 <div class="modal-footer">
+                    <p><a href="{% url 'detail_photo' photo.pk %}">Подробнее...</a></p>
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Закрыть</button>
                 </div>
             </div>

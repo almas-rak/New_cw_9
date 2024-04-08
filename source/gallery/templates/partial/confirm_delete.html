@@ -1,0 +1,6 @@
+<form action="{% url 'delete_photo' photo.pk %}" method="post">
+    {% csrf_token %}
+    <h3>Вы действительно хотите удалить фото?</h3>
+    <input type="submit" class="btn btn-danger" value="Да">
+    <a href="{% url 'detail_photo' photo.pk %}" class="btn btn-primary" >Отмена</a>
+</form>

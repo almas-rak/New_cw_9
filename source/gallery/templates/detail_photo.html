@@ -22,14 +22,18 @@
             <div class="delete-icon">
                 <i class="fas fa-trash"></i>
             </div>
+        </div> 
+            <p> {{ photo.caption }} </p>
+            <p> {{ photo.author }} </p>
+            <p> {{ photo.created_at }} </p>
+            <p><a href="{% url 'profile' photo.author.pk %}" >{{ photo.author }}</a></p>
+            {% if delete %}
+                {% include "partial/confirm_delete.html" %}
+            {% else %}
+                <p><a href="{% url  'update_photo' photo.pk  %}" class="btn btn-primary" >изменить</a></p>
+                <p><a href="{% url  'delete_photo' photo.pk  %}" class="btn btn-danger" >Удалить</a></p>    
+            {% endif %}
         </div>
-                
-                <p> {{ photo.caption }} </p>
-                <p> {{ photo.author }} </p>
-                <p> {{ photo.created_at }} </p>
-        <p><a href="{% url  'update_photo' photo.pk  %}" >изменить</a></p>
-        <p><a href="{% url 'profile' photo.author.pk %}" >{{ photo.author }}</a></p>
-    </div>
 
 
     

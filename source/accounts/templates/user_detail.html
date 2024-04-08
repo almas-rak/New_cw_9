@@ -15,23 +15,24 @@
     <p>Фамилия: {{ user_obj.last_name }}</p>
     <h2>Публикации</h2>
     {% if publications %}
-    
-    {% for photo in publications %}
-    <div class="card m-2" style="width: 18rem;">
-        <a href="{% url 'detail_photo' photo.pk  %}" class="m-auto mt-2" style="width: 17rem;">
-            <img class="card-img-top" src="{{ photo.photo.url }}" style="height: 300px;">
-        </a>
-        <div class="card-body">
-            <p class="card-text"><small class="text-muted">Подпись: </small>{{ photo.caption }}</p>
-            <br>
-            <p class="card-text"></p>
-            <p class="card-text"> <small class="text-muted">Автор: </small><a href="{% url 'profile' photo.author.pk %}" >{{ photo.author }}</a> </p>
-            
-        <small class="text-muted">Дата и время добавления</small>
-            <p class="card-text"> {{ photo.created_at }} </p>
-        </div>
+    <div class="d-flex">
+        {% for photo in publications %}
+            <div class="card m-2" style="width: 18rem;">
+                <a href="{% url 'detail_photo' photo.pk  %}" class="m-auto mt-2" style="width: 17rem;">
+                    <img class="card-img-top" src="{{ photo.photo.url }}" style="height: 300px;">
+                </a>
+                <div class="card-body">
+                    <p class="card-text"><small class="text-muted">Подпись: </small>{{ photo.caption }}</p>
+                    <br>
+                    <p class="card-text"></p>
+                    <p class="card-text"> <small class="text-muted">Автор: </small><a href="{% url 'profile' photo.author.pk %}" >{{ photo.author }}</a> </p>
+                    
+                <small class="text-muted">Дата и время добавления</small>
+                    <p class="card-text"> {{ photo.created_at }} </p>
+                </div>
+            </div>
+        {% endfor %}
     </div>
-    {% endfor %}
     {% else %}
     <p class="card-text"> <small class="text-muted">Нет публикаций </small> </p>
     {% endif %}
