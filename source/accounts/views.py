@@ -60,7 +60,7 @@ class RegisterView(CreateView):
 def profile_view(request, pk):
     user = get_user_model().objects.get(pk=pk)
     profile = AccountProfile.objects.get(user=user)
-    publications = GalleryPhoto.objects.filter(author=pk)
+    publications = GalleryPhoto.objects.filter(author=pk, is_deleted=False)
     favorite = FavoriteModel.objects.filter(us_pk=pk)
     template_name = "user_detail.html"
     context = {
